@@ -1,0 +1,7 @@
+
+kubectl version --client
+
+kubectl config view // Location of K8 configuration -  ~/.kube/config file (on Linux), C:\Users\USER_NAME\.kube\config file (on Windows)
+
+kubectl cluster-info
+

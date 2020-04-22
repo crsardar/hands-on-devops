@@ -1,0 +1,71 @@
+
+"Kubernetes is an open-source system for automating deployment, scaling, and management of containerized applications."
+
+Features - 
+	Automatic bin packing
+	Self-healing
+	Horizontal scaling
+	Service discovery and Load balancing
+
+Components -
+	Master Node - 		Provides a running environment for the control plane responsible for managing the state of 
+						a Kubernetes cluster, and it is the brain behind all operations inside the cluster. 
+						
+		API Server - 		A central control plane component running on the master node, coordinates all 
+							administrative tasks,  intercepts RESTful calls from users, the only master plane 
+							component to talk to the etcd data store.
+		
+		Schedular - 		Assigns new objects, such as pods, to nodes; Resource Instantiation & Allcation Decision.
+		
+		Controller Managers - 		Control plane components on the master node running controllers to regulate 
+									the state of the Kubernetes cluster. Controllers are watch-loops continuously 
+									running and comparing the cluster's desired state with its current state.
+									
+									kube-controller-manager : runs controllers responsible to act when nodes become 
+									unavailable, to ensure pod counts are as expected.
+									
+									cloud-controller-manager : manages storage volumes, load balancing and routing.
+		etcd 
+	
+	
+	Worker Node - 		Provides a running environment for client applications.
+		
+		Container Runtime - 		Ex - Docker, CRI-O...
+									Container Runtime Interface (CRI), Ex - dockershim.
+		
+		kubelet - 		An agent running on each node and communicates with the control plane components from the 
+						master node. It receives Pod definitions, primarily from the API server, and interacts with 
+						the container runtime on the node to run containers associated with the Pod. It also 
+						monitors the health of the Pod's running containers.
+						A kubelet manages all Pods running in a Node.
+						
+		kube-proxy - 		The network agent which runs on each node, responsible for dynamic updates and maintenance 
+							of all networking rules on the node. 
+							It abstracts the details of Pods networking and forwards connection requests to Pods.
+		
+		Adds On - 		Ex - DNS, Logging..
+
+
+
+Kubernete Object Types -
+	
+	Deployment - 	Deployment objects provide declarative updates to Pods and ReplicaSets.
+	
+	Pod - 			The smallest and simplest unit of deployment in Kubernetes, which represent an instance of the application.
+					It is a logical collection of one or more containers, which - 
+					- Are scheduled together on the same host with the Pod.
+					- Share the same Network Namespace.
+					- Have assecc to the same mounted external storage(volume).
+	
+	
+
+
+
+
+
+
+
+
+
+
+	

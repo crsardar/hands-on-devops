@@ -1,0 +1,10 @@
+
+minikube start
+
+minikube stop
+
+minikube dashboard
+
+kubectl proxy 		// authenticates with the API server on the master node
+					// now try http://localhost:8001/
+
