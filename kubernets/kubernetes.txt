@@ -57,14 +57,27 @@ Kubernete Object Types -
 					- Share the same Network Namespace.
 					- Have assecc to the same mounted external storage(volume).
 	
-	
+	Labels - 		Are key-value pairs attached to Kubernetes objects (e.g. Pods, ReplicaSets). 
+					Labels are used to organize and select a subset of objects, based on the requirements in place. 
+					Many objects can have the same Label(s). Labels do not provide uniqueness to objects. 
+					Controllers use Labels to logically group together decoupled objects, rather than using objects' names or IDs.
 
 
 
 
-
-
-
+ReplicationController -	Is NOT recomended.
+ReplicaSets - 			Is recomended in place of ReplicationController. ReplicaSets support both equality- and set-based selectors, 
+						whereas ReplicationControllers only support equality-based Selectors. Currently, this is the only difference.
+						
+Namespaces -			If multiple users and teams use the same Kubernetes cluster we can partition the cluster into virtual 
+						sub-clusters using Namespaces. The names of the resources/objects created inside a Namespace are unique, 
+						but not across Namespaces in the cluster.						
+						
+		Defauls Namespaces -
+			default           
+			kube-public
+			kube-system
+			kube-node-lease
 
 
 

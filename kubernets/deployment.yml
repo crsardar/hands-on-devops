@@ -1,4 +1,3 @@
-
 apiVersion: apps/v1                 // Mandatory, Kubernente REST end point
 kind: Deployment                    // Mandatory, Can be Pod, Replicaset, Namespace, Service 
 metadata:                           // Mandatory , Basic information for 'kind'
@@ -12,6 +11,7 @@ spec:                               // Mandatory, Marks the begining of the bloc
       app: nginx
   template:                         // Template for Pod
     metadata:
+      name: nginx-pod
       labels:
         app: nginx
     spec:                           // Defines desired state of the Pod
