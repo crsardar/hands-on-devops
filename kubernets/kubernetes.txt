@@ -62,6 +62,8 @@ Kubernete Object Types -
 					Many objects can have the same Label(s). Labels do not provide uniqueness to objects. 
 					Controllers use Labels to logically group together decoupled objects, rather than using objects' names or IDs.
 
+	Services -      Groups Pods to provide common access point for the the external world to the containerized applications.
+
 
 
 
@@ -79,6 +81,10 @@ Namespaces -			If multiple users and teams use the same Kubernetes cluster we ca
 			kube-system
 			kube-node-lease
 
+
+Service Accounts (No User In Kubernetes)
+Attribute-Based Access Control (ABAC)
+Role-Based Access Control (RBAC)
 
 
 	
