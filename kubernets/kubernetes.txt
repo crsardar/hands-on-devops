@@ -63,6 +63,7 @@ Kubernete Object Types -
 					Controllers use Labels to logically group together decoupled objects, rather than using objects' names or IDs.
 
 	Services -      Groups Pods to provide common access point for the the external world to the containerized applications.
+					Service logically groups Pods and defines a policy to access them.
 
 
 
@@ -80,6 +81,76 @@ Namespaces -			If multiple users and teams use the same Kubernetes cluster we ca
 			kube-public
 			kube-system
 			kube-node-lease
+
+
+Liveness and Readiness Probes -     Implementing Liveness and Readiness Probes allows the kubelet to
+                                    control the health of the application running inside a Pod's
+                                    container and force a container restart of an unresponsive application.
+
+    Liveness Probe -    Checks on an application's health, and if the health check fails, kubelet
+                        restarts the affected container automatically.
+
+                        Liveness Probes can be set by defining:
+
+                            Liveness command :
+
+                                        apiVersion: v1
+                                        kind: Pod
+                                        metadata:
+                                          labels:
+                                            test: liveness
+                                          name: liveness-exec
+                                        spec:
+                                          containers:
+                                          - name: liveness
+                                            image: k8s.gcr.io/busybox
+                                            args:
+                                            - /bin/sh
+                                            - -c
+                                            - touch /tmp/healthy; sleep 30; rm -rf /tmp/healthy; sleep 600
+                                            livenessProbe:
+                                              exec:
+                                                command:
+                                                - cat
+                                                - /tmp/healthy
+                                              initialDelaySeconds: 5
+                                              periodSeconds: 5
+
+                            Liveness HTTP request :
+
+                                        # Inside "spec"
+                                        livenessProbe:
+                                              httpGet:
+                                                path: /healthz
+                                                port: 8080
+                                                httpHeaders:
+                                                - name: X-Custom-Header
+                                                  value: Awesome
+                                              initialDelaySeconds: 3
+                                              periodSeconds: 3
+
+                            TCP Liveness Probe :
+
+                                        livenessProbe:
+                                              tcpSocket:
+                                                port: 8080
+                                              initialDelaySeconds: 15
+                                              periodSeconds: 20
+
+    Readiness Probes :  Sometimes, applications have to meet certain conditions before they can
+                        serve traffic. These conditions include ensuring that the depending service
+                        is ready, or acknowledging that a large dataset needs to be loaded, etc.
+
+                        readinessProbe:
+                          exec:
+                            command:
+                            - cat
+                            - /tmp/healthy
+                          initialDelaySeconds: 5
+                          periodSeconds: 5
+
+                        A Pod with containers that do not report ready status will not receive traffic
+                        from Kubernetes Services
 
 
 Service Accounts (No User In Kubernetes)

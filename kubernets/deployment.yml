@@ -1,20 +1,22 @@
-apiVersion: apps/v1                 // Mandatory, Kubernente REST end point
-kind: Deployment                    // Mandatory, Can be Pod, Replicaset, Namespace, Service 
-metadata:                           // Mandatory , Basic information for 'kind'
+# An example of a Deployment definition file
+# Use "kubectl create -f deployment.yml" to run it from CLI
+apiVersion: apps/v1                 # Mandatory, Kubernente REST end point
+kind: Deployment                    # Mandatory, Can be Pod, Replicaset, Namespace, Service 
+metadata:                           # Mandatory , Basic information for 'kind'
   name: nginx-deployment
   labels:
     app: nginx
-spec:                               // Mandatory, Marks the begining of the block defining the desired state of the Deployment object.
-  replicas: 3                       // Make sure 3 Pods are running at a given time.
+spec:                               # Mandatory, Marks the begining of the block defining the desired state of the Deployment object.
+  replicas: 3                       # Make sure 3 Pods are running at a given time.
   selector:
     matchLabels:
       app: nginx
-  template:                         // Template for Pod
+  template:                         # Template for Pod
     metadata:
       name: nginx-pod
       labels:
         app: nginx
-    spec:                           // Defines desired state of the Pod
+    spec:                           # Defines desired state of the Pod
       containers:
       - name: nginx
         image: nginx:1.15.11

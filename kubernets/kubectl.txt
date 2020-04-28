@@ -5,13 +5,21 @@ kubectl config view // Location of K8 configuration -  ~/.kube/config file (on L
 
 kubectl cluster-info
 
-kubectl get namespaces
-
 kubectl create deployment mynginx --image=nginx: 1.15-alpine'
 
-kubectl describe deployment mynginx
+kubectl create -f webserver.yaml
 
+kubectl get all
+kubectl get namespaces
+kubectl get deployments
+kubectl get replicasets
+kubectl get pods
 kubectl get deploy,rs,po
+kubectl get pods -l k8s-app=webserver
+
+
+kubectl describe deployment mynginx
+kubectl describe pod webserver-74d8bd488f-dwbzz
 
 kubectl scale deploy mynginx --replicas=3
 
@@ -24,4 +32,7 @@ kubectl set image deployment mynginx nginx=nginx:1.16-alpine // it also does rol
 kubectl rollout undo deployment mynginx --to-revision=1
 
 
+kubectl delete deployment.apps/mynginx
+kubectl delete deployments mynginx
+# Deleting a Deployment also deletes the ReplicaSet and the Pods it created
 
